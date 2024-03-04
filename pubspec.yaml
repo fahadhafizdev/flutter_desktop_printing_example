@@ -43,6 +43,16 @@ dependencies:
   permission_handler: ^11.2.0
   file_picker: ^6.1.1
   download_assets: ^3.1.1
+  google_fonts: ^6.1.0
+  flutter_screenutil: ^5.9.0
+  intl: ^0.19.0
+  get: ^4.6.6
+  dropdown_button2: ^2.3.9
+  flutter_dotenv: ^5.1.0
+  shared_preferences: ^2.2.2
+  logger: ^2.0.2+1
+  socket_io_client: ^3.0.0-beta.0
+  centrifuge: ^0.14.0
   # quick_usb: ^0.4.0
   # usb_thermal_printer_web: ^0.0.3
   # flutter_pos_printer_platform_image_3: any
@@ -72,6 +82,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - .env
 
   # To add assets to your application, add an assets section, like this:
   # assets:

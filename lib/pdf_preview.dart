@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_printer/app/modules/home/components/request/card_request.dart';
+import 'package:flutter_printer/app/utils/extension/app_log.dart';
 import 'package:printing/printing.dart';
 
 class PdfPreviewPage extends StatelessWidget {
@@ -8,8 +10,24 @@ class PdfPreviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PdfPreview(
-        build: (format) => data,
+      appBar: AppBar(
+        title: Text('print'),
+      ),
+      body: PdfPreview.builder(
+        build: (format) {
+          logSys('$data', title: 'PRINTER');
+          return data;
+        },
+        pagesBuilder: (context, pages) {
+          return SizedBox();
+        },
+        // useActions: false,
+        onPrinted: (context) {
+          logSys(title: 'PRINTED SUCCESS', 'success print');
+        },
+        onPrintError: (context, error) {
+          logSys(title: 'PRINTED ERROR', error.toString());
+        },
       ),
     );
   }
