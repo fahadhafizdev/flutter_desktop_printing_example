@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'package:flutter_printer/app/utils/extension/method_enum.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 import '../../utils/extension/app_log.dart';
 import 'logger_interceptor.dart';
-import 'message_error.dart';
 import 'share_preference_service.dart';
 
 class CustomService {
