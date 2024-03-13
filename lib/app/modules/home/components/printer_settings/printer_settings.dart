@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_printer/app/config/config.dart';
-import 'package:flutter_printer/app/modules/home/components/printer_settings/choose_api.dart';
-import 'package:flutter_printer/app/modules/home/components/printer_settings/choose_paper.dart';
 import 'package:flutter_printer/app/modules/home/components/printer_settings/choose_printer.dart';
 import 'package:flutter_printer/app/modules/home/components/printer_settings/system_log/system_log.dart';
 import 'package:flutter_printer/app/utils/extension/extension.dart';
-import 'package:flutter_printer/download_pdf_service.dart';
-import 'package:flutter_printer/pdf_preview.dart';
-import 'package:flutter_printer/printer_service_printing.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:printing/printing.dart';
 
 class PrinterSettings extends StatelessWidget {
   const PrinterSettings({super.key});

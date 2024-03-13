@@ -4,11 +4,8 @@ import 'package:flutter_printer/app/config/theme/app_color.dart';
 import 'package:flutter_printer/app/data/models/request_model.dart';
 import 'package:flutter_printer/app/utils/extension/app_log.dart';
 import 'package:flutter_printer/app/utils/extension/extension.dart';
-import 'package:flutter_printer/download_pdf_service.dart';
 import 'package:flutter_printer/pdf_preview.dart';
-import 'package:flutter_printer/printer_service_printing.dart';
 import 'package:get/get.dart';
-import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
 class CardRequest extends StatelessWidget {
@@ -41,28 +38,14 @@ class CardRequest extends StatelessWidget {
 
     return GestureDetector(
       onTap: () async {
-        Printing.directPrintPdf(
-          printer: Printer(url: 'HP printer zx250', name: 'HP printer zx250'),
-          onLayout: (PdfPageFormat format) async => data.docUrl,
-          name: 'document',
-          format: PdfPageFormat.a4,
-        );
-        Printing.info().printInfo(info: 'START PRINT');
-        Printing.info().asStream().listen((event) {
-          logSys(title: 'PRINTING INFO', '$event');
-        });
-        Printing.info().printError(
-            info: 'PRINT ERROR',
-            logFunction: (data) {
-              logSys('FAILED PRINT', title: 'FAILED PRINTER');
-            });
+        Get.to(PdfPreviewPage(data: data.docUrl));
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: IntrinsicHeight(
           child: PdfPreview.builder(
-            previewPageMargin: EdgeInsets.all(0),
-            padding: EdgeInsets.all(0),
+            previewPageMargin: const EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             build: (format) {
               logSys('$data', title: 'PRINTER');
               return data.docUrl;

@@ -5,8 +5,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_printer/app/modules/home/controllers/home_controller.dart';
-import 'package:flutter_printer/printer_service_printing.dart';
-import 'package:download_assets/download_assets.dart';
 import 'package:get/get.dart';
 
 import 'package:path_provider/path_provider.dart';

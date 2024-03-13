@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_printer/app/config/config.dart';
 import 'package:flutter_printer/app/modules/home/components/home_header/home_header.dart';
-import 'package:flutter_printer/app/modules/home/components/home_menu/home_menu.dart';
 import 'package:flutter_printer/app/modules/home/components/printer_settings/printer_settings.dart';
 import 'package:flutter_printer/app/modules/home/components/request/request_view.dart';
 import 'package:flutter_printer/app/utils/extension/extension.dart';
-import 'package:flutter_printer/widgets/custom_button.dart';
 
 import 'package:get/get.dart';
 

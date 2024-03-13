@@ -1,7 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_printer/app/config/config.dart';
-import 'package:flutter_printer/app/data/services/share_preference_service.dart';
 import 'package:flutter_printer/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
