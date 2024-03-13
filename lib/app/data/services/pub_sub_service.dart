@@ -63,10 +63,11 @@ class PubSubService {
         break;
       case 'centrifuge':
         centrifuge.subscribe(
-            channel: 'kelola/${user!.id}/event',
-            callback: (dynamic data) {
-              syncRequest(data);
-            });
+          channel: 'kelola/${user!.id}/event',
+          callback: (dynamic data) {
+            syncRequest(data);
+          },
+        );
         break;
       default:
     }
