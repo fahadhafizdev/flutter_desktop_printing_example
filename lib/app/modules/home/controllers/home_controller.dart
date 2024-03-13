@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_printer/app/config/theme/app_url.dart';
 import 'package:flutter_printer/app/data/models/log_model.dart';
@@ -15,8 +12,6 @@ import 'package:flutter_printer/download_pdf_service.dart';
 import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
-
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class HomeController extends GetxController {
   @override
@@ -40,13 +35,6 @@ class HomeController extends GetxController {
   List<String> dataPrinter = ['Xp-35DFG', 'HP-EGRT4', 'none'];
   RxString printerSelected = 'none'.obs;
 
-  List<String> dataAPI = [
-    'https://api.kelola.id/staff',
-    'https://api-staging.kelola.id/staff',
-    'none',
-  ];
-  RxString APISelected = 'none'.obs;
-
   Future<void> getPrinters() async {
     // await Printing.listPrinters().then((value) {
     //   dataPrinter.value = value;
@@ -58,6 +46,9 @@ class HomeController extends GetxController {
     // dataPrinter.add('XP-546hI');
   }
 
+  List<String> dataPaper = ['A3', 'A4'];
+  RxString paperSelected = 'none'.obs;
+
   //----------FLOW LOGOUT--------------
   void logout() {
     CustomService().request(
@@ -67,6 +58,7 @@ class HomeController extends GetxController {
       withToken: true,
     );
     SharedPrefferenceService().clear();
+    cli.dispose();
     Get.offAndToNamed('/input-saas-url');
   }
   //----------END FLOW LOGOUT-----------
@@ -109,7 +101,21 @@ class HomeController extends GetxController {
 
     listRequest.add(newData);
     addLog(
-        const LogModel(title: 'SUCCESS', status: 'Success add pdf to queue'));
+      LogModel(
+          title: 'SUCCESS',
+          status: 'Success add pdf to queue (${newData.title})'),
+    );
+  }
+
+  void printRequest(RequestModel newData) {
+    Printing.directPrintPdf(
+      printer: Printer(url: printerSelected.value),
+      onLayout: (PdfPageFormat format) async => newData.docUrl,
+      format: PdfPageFormat.standard,
+    );
+    addLog(
+      LogModel(title: 'SUCCESS', status: 'pdf is printing (${newData.title})'),
+    );
   }
 
   RxList<LogModel> logRequest = <LogModel>[].obs;
@@ -149,9 +155,10 @@ class HomeController extends GetxController {
   }
 
   //------FLOW SOCKET----------
+  late PubSubService cli;
   Future<void> initSocket() async {
+    cli = PubSubService();
     logSys('init socket in home', title: 'SOCKET_IO');
-    PubSubService cli = PubSubService();
 
     await getProfile();
     await cli.init();

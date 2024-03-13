@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_printer/app/utils/extension/method_enum.dart';
 import 'package:dio/dio.dart';
+import 'package:get/route_manager.dart';
 
 import '../../utils/extension/app_log.dart';
 import 'logger_interceptor.dart';
@@ -73,29 +74,11 @@ class CustomService {
         return response.data;
       }
     } on DioException catch (e) {
-      logSys('custom error : $e');
-      // logSys('custom error data : ${e.response!.data}');
-
-      // logSys('custom error message 1: ${e.response!.data}');
-
-      // String message =
-      //     e.response == null ? '' : e.response!.data['message'] ?? '';
-
-      // sendSentry(title, '${e.response!.data}');
-
-      // // ignore: use_build_context_synchronously
-      // Utils().showCustomSnackBar(ctx, e.response!.data['message'], cRed, 4);
-
-      // onError(title: title, message: message, err: e);
-
       logSys('code : ${e.response!.data['code']}');
 
       if (e.response!.data['code'].toString() == 'invalid_token') {
-        // AuthService().logout();
-        // NavigatorKey.navigatorKey.currentContext!.read<PageCubit>().setPage(0);
         SharedPrefferenceService().clear();
-        // Navigator.pushNamedAndRemoveUntil(
-        //     NavigatorKey.navigatorKey.currentContext!, '/', (route) => false);
+        Get.offAndToNamed('/input-saas-url');
       }
 
       throw Exception(e.response!.data['message']);

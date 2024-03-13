@@ -78,8 +78,8 @@ class InputSaasUrlController extends GetxController {
         params: {"app_url": "$url.kelola.id"},
       );
 
-      if (data['status'] == "active") {
-        baseUrl = data['api_url'];
+      if (data['result']['status'] == "active") {
+        baseUrl = data['result']['api_url'];
         // baseUrl = 'https://api-staging.kelola.id/staff';
         SharedPrefferenceService().saveUrl(baseUrl);
         Get.toNamed('/login');

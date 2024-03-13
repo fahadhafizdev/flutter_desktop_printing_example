@@ -67,17 +67,17 @@ class PrinterSettings extends StatelessWidget {
                 color: AppColor.cWhite,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ChoosePrinter(),
-                  24.0.height,
-                  ChoosePaper(),
+                  // 24.0.height,
+                  // ChoosePaper(),
                 ],
               ),
             ),
             24.0.height,
-            SystemLog(),
+            const SystemLog(),
           ],
         ),
       ),
