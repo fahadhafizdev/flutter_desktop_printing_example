@@ -57,16 +57,17 @@ class RequestView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: SingleChildScrollView(
+                  controller: c.scrollCtx2,
                   child: Obx(
-                () => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ...c.listRequest.map(
-                      (element) => CardRequest(data: element),
+                    () => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...c.listRequest.map(
+                          (element) => CardRequest(data: element),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )),
+                  )),
             ),
             24.0.height,
           ],

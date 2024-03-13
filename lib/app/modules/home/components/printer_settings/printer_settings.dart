@@ -27,36 +27,10 @@ class PrinterSettings extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
-              onTap: () async {
-                var docUrl;
-                String baseUrl =
-                    "https://s3.ap-southeast-1.amazonaws.com/kelola/shopee/label-market/48e432f1-d762-4569-99b2-6dcc8cf92f33.pdf";
-                await DownloadPdfService()
-                    .download(baseUrl, 'sample.pdf')
-                    .then((value) {
-                  docUrl = value;
-                });
-                // Printing.directPrintPdf(
-                //   // printer: Printer(url: printUrl, name: printSelected),
-                //   printer: Printer(url: dataPrinter[1].name),
-                //   onLayout: (PdfPageFormat format) async => docUrl,
-
-                // );
-
-                // ignore: use_build_context_synchronously
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PdfPreviewPage(data: docUrl),
-                  ),
-                );
-              },
-              child: Text(
-                'Printer Settings',
-                style: AppFont.interBlack1.copyWith(
-                  fontWeight: AppFont.semiBold,
-                ),
+            Text(
+              'Printer Settings',
+              style: AppFont.interBlack1.copyWith(
+                fontWeight: AppFont.semiBold,
               ),
             ),
             24.0.height,

@@ -105,6 +105,7 @@ class HomeController extends GetxController {
           title: 'SUCCESS',
           status: 'Success add pdf to queue (${newData.title})'),
     );
+    scrollDown2();
   }
 
   void printRequest(RequestModel newData) {
@@ -129,6 +130,17 @@ class HomeController extends GetxController {
     if (scrollCtx.hasClients) {
       scrollCtx.animateTo(
         scrollCtx.position.maxScrollExtent,
+        duration: const Duration(seconds: 2),
+        curve: Curves.fastOutSlowIn,
+      );
+    }
+  }
+
+  ScrollController scrollCtx2 = ScrollController();
+  Future<void> scrollDown2() async {
+    if (scrollCtx2.hasClients) {
+      scrollCtx2.animateTo(
+        scrollCtx2.position.maxScrollExtent,
         duration: const Duration(seconds: 2),
         curve: Curves.fastOutSlowIn,
       );

@@ -25,7 +25,7 @@ class HomeView extends GetView<HomeController> {
             children: [
               const HomeHeader(),
               12.0.height,
-              Row(
+              const Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   RequestView(),
