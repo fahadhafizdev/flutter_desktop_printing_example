@@ -32,18 +32,30 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  List<String> dataPrinter = ['Xp-35DFG', 'HP-EGRT4', 'none'];
+  List<String> dataPrinter = ['none'];
   RxString printerSelected = 'none'.obs;
+  RxBool loadPrinter = false.obs;
 
   Future<void> getPrinters() async {
-    // await Printing.listPrinters().then((value) {
-    //   dataPrinter.value = value;
-    //   log('printer added ${dataPrinter.length}');
-    // });
+    late List<Printer> listData;
+    await Printing.listPrinters().then((value) {
+      listData = value;
 
-    // Printer xp = Printer(url: 'XP-546Z1');
+      logSys('printer added ${dataPrinter.length}');
+    });
 
-    // dataPrinter.add('XP-546hI');
+    for (var element in listData) {
+      dataPrinter.add(element.name);
+      addLog(LogModel(
+          title: 'SUCCESS',
+          status: 'success add printer ${element.name} to list printer'));
+      refreshPrinter();
+    }
+  }
+
+  void refreshPrinter() {
+    loadPrinter(true);
+    loadPrinter(false);
   }
 
   List<String> dataPaper = ['A3', 'A4'];
@@ -93,6 +105,7 @@ class HomeController extends GetxController {
   //----------FLOW REQUEST PDF---------
   RxList<RequestModel> listRequest = <RequestModel>[].obs;
   void addRequest(RequestModel newData) async {
+    if (printerSelected.value == 'none') return;
     await DownloadPdfService()
         .download(newData.url, newData.title)
         .then((value) {
@@ -105,18 +118,23 @@ class HomeController extends GetxController {
           title: 'SUCCESS',
           status: 'Success add pdf to queue (${newData.title})'),
     );
+    await printRequest(newData);
+    await Future.delayed(const Duration(seconds: 1));
     scrollDown2();
+    scrollDown();
   }
 
-  void printRequest(RequestModel newData) {
+  Future<void> printRequest(RequestModel newData) async {
     Printing.directPrintPdf(
       printer: Printer(url: printerSelected.value),
       onLayout: (PdfPageFormat format) async => newData.docUrl,
-      format: PdfPageFormat.standard,
+      format: PdfPageFormat.a6,
     );
     addLog(
       LogModel(title: 'SUCCESS', status: 'pdf is printing (${newData.title})'),
     );
+    scrollDown2();
+    scrollDown();
   }
 
   RxList<LogModel> logRequest = <LogModel>[].obs;
@@ -149,6 +167,7 @@ class HomeController extends GetxController {
 
   void addLog(LogModel data) async {
     logRequest.add(data);
+    await scrollDown();
     await scrollDown();
   }
   //----------END REQUEST PDF----------

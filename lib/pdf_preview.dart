@@ -11,16 +11,14 @@ class PdfPreviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('print'),
+        title: Text('Preview'),
       ),
-      body: PdfPreview.builder(
+      body: PdfPreview(
         build: (format) {
           logSys('$data', title: 'PRINTER');
           return data;
         },
-        pagesBuilder: (context, pages) {
-          return SizedBox();
-        },
+
         // useActions: false,
         onPrinted: (context) {
           logSys(title: 'PRINTED SUCCESS', 'success print');

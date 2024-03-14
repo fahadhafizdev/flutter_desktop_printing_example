@@ -39,7 +39,7 @@ class SystemLog extends StatelessWidget {
                   ...c.logRequest.map(
                     (element) => TextLog(data: element),
                   ),
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 50),
                 ],
               ),
             ),

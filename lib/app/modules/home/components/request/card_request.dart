@@ -6,6 +6,7 @@ import 'package:flutter_printer/app/utils/extension/app_log.dart';
 import 'package:flutter_printer/app/utils/extension/extension.dart';
 import 'package:flutter_printer/pdf_preview.dart';
 import 'package:get/get.dart';
+import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
 class CardRequest extends StatelessWidget {

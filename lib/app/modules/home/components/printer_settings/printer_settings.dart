@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_printer/app/config/config.dart';
 import 'package:flutter_printer/app/modules/home/components/printer_settings/choose_printer.dart';
 import 'package:flutter_printer/app/modules/home/components/printer_settings/system_log/system_log.dart';
+import 'package:flutter_printer/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_printer/app/utils/extension/extension.dart';
+import 'package:get/get.dart';
 
 class PrinterSettings extends StatelessWidget {
   const PrinterSettings({super.key});

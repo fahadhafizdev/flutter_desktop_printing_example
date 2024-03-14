@@ -14,6 +14,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     controller.initSocket();
     controller.initLog();
+    controller.getPrinters();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),

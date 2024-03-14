@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_printer/app/config/config.dart';
+import 'package:flutter_printer/app/modules/home/components/printer_settings/choose_printer.dart';
 import 'package:flutter_printer/app/modules/home/components/request/card_request.dart';
 import 'package:flutter_printer/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_printer/app/utils/extension/extension.dart';
@@ -11,6 +12,34 @@ class RequestView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeController c = Get.find();
+
+    Widget printerEmpty() {
+      return const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 100),
+            Icon(Icons.print, size: 50),
+            SizedBox(height: 12),
+            Text(
+              'Select Your Printer',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 24,
+              ),
+            ),
+            SizedBox(height: 12),
+            SizedBox(
+              width: 300,
+              child: ChoosePrinter(isForRequest: true),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Expanded(
       flex: 2,
       child: Container(
@@ -23,30 +52,43 @@ class RequestView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Request',
-              style: AppFont.interBlack1.copyWith(
-                fontWeight: AppFont.semiBold,
-              ),
-            ),
-            12.0.height,
             Row(
               children: [
-                const Text('Success'),
-                2.0.width,
                 Text(
-                  '10',
-                  style: TextStyle(color: AppColor.cGrey3),
+                  'Request',
+                  style: AppFont.interBlack1.copyWith(
+                    fontWeight: AppFont.semiBold,
+                  ),
                 ),
-                30.0.width,
-                const Text('Failed'),
-                2.0.width,
-                Text(
-                  '5',
-                  style: TextStyle(color: AppColor.cGrey3),
-                ),
+                const SizedBox(width: 5),
+                Obx(
+                  () => Text(
+                    '(${c.listRequest.length})',
+                    style: AppFont.interBlack1.copyWith(
+                      fontWeight: AppFont.semiBold,
+                    ),
+                  ),
+                )
               ],
             ),
+            // 12.0.height,
+            // Row(
+            //   children: [
+            //     const Text('Success'),
+            //     2.0.width,
+            //     Text(
+            //       '10',
+            //       style: TextStyle(color: AppColor.cGrey3),
+            //     ),
+            //     30.0.width,
+            //     const Text('Failed'),
+            //     2.0.width,
+            //     Text(
+            //       '5',
+            //       style: TextStyle(color: AppColor.cGrey3),
+            //     ),
+            //   ],
+            // ),
             24.0.height,
             Container(
               height: 550,
@@ -65,6 +107,9 @@ class RequestView extends StatelessWidget {
                         ...c.listRequest.map(
                           (element) => CardRequest(data: element),
                         ),
+                        if (c.printerSelected.value == 'none') ...[
+                          printerEmpty(),
+                        ],
                       ],
                     ),
                   )),

@@ -19,27 +19,49 @@ class HomeHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          GestureDetector(
-            onTap: () {
-              c.initSocket();
-            },
-            child: Container(
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: AppColor.cGrey1,
-              ),
-              child: const Icon(
-                Icons.person,
-                size: 20,
-              ),
+          //NOTE : USER EMAIL
+          Container(
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: AppColor.cGrey1,
+            ),
+            child: const Icon(
+              Icons.person,
+              size: 20,
             ),
           ),
           const SizedBox(width: 12),
           Obx(
             () => c.loadProfile.value
-                ? const SizedBox()
+                ? const SizedBox(
+                    width: 100,
+                    child: LinearProgressIndicator(color: Colors.grey))
                 : Text(c.userModel.id != null ? c.userModel.email! : '-'),
+          ),
+          const SizedBox(width: 24),
+
+          //NOTE : USER WAREHOUSE
+          Container(
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: AppColor.cGrey1,
+            ),
+            child: const Icon(
+              Icons.home_work,
+              size: 20,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Obx(
+            () => c.loadProfile.value
+                ? const SizedBox(
+                    width: 100,
+                    child: LinearProgressIndicator(color: Colors.grey))
+                : Text(c.userModel.id != null
+                    ? c.userModel.warehouse!.name ?? ''
+                    : '-'),
           ),
           const Spacer(),
           const HomeMenu(),
