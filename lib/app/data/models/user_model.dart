@@ -35,6 +35,7 @@ class UserModel {
   String? lastLoginAt;
   String? createdAt;
   String? updatedAt;
+  bool? fastPrint;
   Role? role;
   WarehouseModel? warehouse;
   Avatar? avatar;
@@ -50,6 +51,7 @@ class UserModel {
       this.createdAt,
       this.updatedAt,
       this.role,
+      this.fastPrint,
       this.warehouse,
       this.avatar});
 
@@ -64,6 +66,7 @@ class UserModel {
     lastLoginAt = json['last_login_at'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    fastPrint = json['fast_print'];
     role = json['role'] != null ? Role.fromJson(json['role']) : null;
     warehouse = json['warehouse'] != null
         ? WarehouseModel.fromJson(json['warehouse'])

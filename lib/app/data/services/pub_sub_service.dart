@@ -79,12 +79,15 @@ class PubSubService {
     var dataRes = RequestSocketModelResponse.fromJson(data);
     Payload payload = dataRes.payload!;
 
-    c.addRequest(
-      RequestModel(
-        title: payload.body!.name ?? 'undefined',
-        url: payload.body!.content!,
-      ),
-    );
+    //jika isfast print = false maka tidak masuk queue dan print
+    if (!payload.body!.isFastPrint!) return;
+
+    c.addRequest(RequestModel(
+      title: payload.body!.name ?? 'undefined',
+      url: payload.body!.content!,
+      isFastPrint: payload.body!.isFastPrint!,
+      downlodable: payload.body!.downloadable!,
+    ));
   }
 
   void dispose() async {

@@ -53,6 +53,7 @@ class Body {
   String? name;
   String? content;
   bool? downloadable;
+  bool? isFastPrint;
 
   Body({this.mime, this.name, this.content, this.downloadable});
 
@@ -61,6 +62,7 @@ class Body {
     name = json['name'];
     content = json['content'];
     downloadable = json['downloadable'];
+    isFastPrint = json['is_fast_print'];
   }
 
   Map<String, dynamic> toJson() {
@@ -69,6 +71,7 @@ class Body {
     data['name'] = this.name;
     data['content'] = this.content;
     data['downloadable'] = this.downloadable;
+    data['is_fast_print'] = this.isFastPrint;
     return data;
   }
 }

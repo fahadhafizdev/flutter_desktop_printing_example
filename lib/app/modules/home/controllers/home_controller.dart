@@ -118,7 +118,11 @@ class HomeController extends GetxController {
           title: 'SUCCESS',
           status: 'Success add pdf to queue (${newData.title})'),
     );
-    await printRequest(newData);
+
+    //jika donlodable = true --> bisa print
+    if (newData.downlodable) {
+      await printRequest(newData);
+    }
     await Future.delayed(const Duration(seconds: 1));
     scrollDown2();
     scrollDown();

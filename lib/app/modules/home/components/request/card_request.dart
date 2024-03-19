@@ -62,26 +62,29 @@ class CardRequest extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Text(
-                    //       data.title,
-                    //       style: TextStyle(
-                    //         color: AppColor.cBlack,
-                    //         fontSize: 16,
-                    //       ),
-                    //     ),
-                    //     dotStatus('Printing', AppColor.cGreen),
-                    //   ],
-                    // ),
-                    Text(
-                      data.title,
-                      style: TextStyle(
-                        color: AppColor.cBlack,
-                        fontSize: 16,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          data.title,
+                          style: TextStyle(
+                            color: AppColor.cBlack,
+                            fontSize: 16,
+                          ),
+                        ),
+                        dotStatus(
+                          data.downlodable ? 'Print' : 'Can\'t Print',
+                          data.downlodable ? AppColor.cGreen : AppColor.cRed3,
+                        ),
+                      ],
                     ),
+                    // Text(
+                    //   data.title,
+                    //   style: TextStyle(
+                    //     color: AppColor.cBlack,
+                    //     fontSize: 16,
+                    //   ),
+                    // ),
                     3.0.height,
                     dotStatus('${pages.length} page', AppColor.cBlue),
                   ],
