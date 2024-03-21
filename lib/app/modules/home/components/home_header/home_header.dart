@@ -3,6 +3,7 @@ import 'package:flutter_printer/app/config/config.dart';
 import 'package:flutter_printer/app/modules/home/components/home_menu/home_menu.dart';
 import 'package:flutter_printer/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_printer/app/utils/extension/extension.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -23,14 +24,14 @@ class HomeHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              Icons.print,
-              color: AppColor.white1,
-              size: 20,
+            Image.asset(
+              'assets/icons/light.png',
+              height: 5.sp,
+              width: 5.sp,
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 5),
             Text(
-              status ? 'Active' : 'InActive',
+              'Fast Print : ${status ? 'Active' : 'Inactive'}',
               style: TextStyle(
                 color: AppColor.white1,
               ),

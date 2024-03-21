@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_printer/app/routes/app_pages.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_window_close/flutter_window_close.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:get/get.dart';
 

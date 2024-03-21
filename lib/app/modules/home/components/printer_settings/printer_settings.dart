@@ -39,7 +39,7 @@ class PrinterSettings extends StatelessWidget {
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // ChoosePrinter(),
+                  ChoosePrinter(),
                   // 24.0.height,
                   // ChoosePaper(),
                 ],

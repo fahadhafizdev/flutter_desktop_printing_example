@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+import 'package:flutter_printer/app/config/config.dart';
 import 'package:flutter_printer/app/config/theme/app_url.dart';
 import 'package:flutter_printer/app/data/models/log_model.dart';
 import 'package:flutter_printer/app/data/models/request_model.dart';
@@ -9,6 +11,8 @@ import 'package:flutter_printer/app/data/services/share_preference_service.dart'
 import 'package:flutter_printer/app/utils/extension/app_log.dart';
 import 'package:flutter_printer/app/utils/extension/method_enum.dart';
 import 'package:flutter_printer/download_pdf_service.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_window_close/flutter_window_close.dart';
 import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
@@ -176,19 +180,6 @@ class HomeController extends GetxController {
   }
   //----------END REQUEST PDF----------
 
-  Future<void> printPdf({required var docUrl}) async {
-    Printing.directPrintPdf(
-      // printer: Printer(url: printUrl, name: printSelected),
-      printer: Printer(url: 'HP-345345'),
-      onLayout: (PdfPageFormat format) async {
-        format.printInfo(printFunction: () {});
-        format.printError(logFunction: () {});
-        return docUrl;
-      },
-      format: PdfPageFormat.a4,
-    );
-  }
-
   //------FLOW SOCKET----------
   late PubSubService cli;
   Future<void> initSocket() async {
@@ -199,5 +190,63 @@ class HomeController extends GetxController {
     await cli.init();
     await cli.connect();
     await cli.subscribe();
+  }
+
+  //FLOW CLOSE KEYBOARD
+  var alertShowing = false;
+  var index = 0;
+
+  void initCloseWindows() async {
+    FlutterWindowClose.setWindowShouldCloseHandler(() async {
+      if (index == 0) {
+        if (alertShowing) return false;
+        alertShowing = true;
+
+        return await showDialog(
+            context: Get.context!,
+            builder: (context) {
+              return AlertDialog(
+                  title: Text(
+                    'Do you really want to quit?',
+                    style: AppFont.interBlack1.copyWith(
+                      fontWeight: AppFont.semiBold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                        alertShowing = false;
+                      },
+                      child: Text(
+                        'Yes',
+                        style: AppFont.interBlack1,
+                      ),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                          alertShowing = false;
+                        },
+                        child: Text(
+                          'No',
+                          style: AppFont.interBlack1,
+                        ))
+                  ]);
+            });
+      } else if (index == 1) {
+        final result = await FlutterPlatformAlert.showCustomAlert(
+          windowTitle: "Really?",
+          text: "Do you really want to quit?",
+          positiveButtonTitle: "Quit",
+          negativeButtonTitle: "Cancel",
+        );
+        return result == CustomButton.positiveButton;
+      } else if (index == 3) {
+        return await Future.delayed(const Duration(seconds: 1), () => true);
+      }
+      return true;
+    });
   }
 }

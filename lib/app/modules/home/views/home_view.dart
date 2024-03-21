@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:flutter_printer/app/modules/home/components/home_header/home_header.dart';
 import 'package:flutter_printer/app/modules/home/components/printer_settings/printer_settings.dart';
 import 'package:flutter_printer/app/modules/home/components/request/request_view.dart';
 import 'package:flutter_printer/app/utils/extension/extension.dart';
+import 'package:flutter_window_close/flutter_window_close.dart';
 
 import 'package:get/get.dart';
 
@@ -15,6 +17,8 @@ class HomeView extends GetView<HomeController> {
     controller.initSocket();
     controller.initLog();
     controller.getPrinters();
+    controller.initCloseWindows();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
